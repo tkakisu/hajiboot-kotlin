@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:./out/db/customer
+    username: sa
+    password:
+  thymeleaf:
+    mode: HTML
+  jpa:
+    hibernate:
+      ddl-auto: validate
+security:
+  basic:
+    enabled: false
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
