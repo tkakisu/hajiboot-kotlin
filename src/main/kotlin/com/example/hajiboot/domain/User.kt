@@ -7,10 +7,10 @@ import javax.persistence.*
 @Table(name = "users")
 data class User (
     @Id
-    val username: String? = null,
+    var username: String? = null,
     @JsonIgnore
-    val encodedPassword: String? = null,
+    var encodedPassword: String? = null,
     @JsonIgnore
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "user")
-    val customers: List<Customer>? = null
+    var customers: List<Customer>? = null
 )

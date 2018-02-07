@@ -9,9 +9,9 @@ data class Customer(
     @GeneratedValue
     var id: Int? = null,
     @Column(nullable = false)
-    val firstName: String? = null,
+    var firstName: String? = null,
     @Column(nullable = false)
-    val lastName: String? = null,
+    var lastName: String? = null,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = true, name = "username")
     var user: User? = null
