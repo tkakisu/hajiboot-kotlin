@@ -45,13 +45,13 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
 	compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+	compile('org.thymeleaf.extras:thymeleaf-extras-java8time')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
+	compile('org.flywaydb:flyway-core:5.0.6')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-
-	compile 'org.thymeleaf.extras:thymeleaf-extras-java8time'
-	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
-    compile 'org.flywaydb:flyway-core:5.0.6'
+	testCompile('org.springframework.security:spring-security-test')
 }
 
 idea {
