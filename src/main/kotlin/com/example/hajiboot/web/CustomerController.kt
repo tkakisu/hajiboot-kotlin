@@ -3,6 +3,7 @@ package com.example.hajiboot.web
 import com.example.hajiboot.domain.Customer
 import com.example.hajiboot.service.CustomerService
 import com.example.hajiboot.service.LoginUserDetails
+import org.modelmapper.ModelMapper
 import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping("customers")
-class CustomerController(@Autowired val customerService: CustomerService) {
+class CustomerController(@Autowired val customerService: CustomerService,
+                             @Autowired val modelMapper: ModelMapper) {
     @ModelAttribute
     fun setUpForm(): CustomerForm {
         return CustomerForm()
@@ -33,8 +35,7 @@ class CustomerController(@Autowired val customerService: CustomerService) {
         if (result.hasErrors()) {
             return list(model)
         }
-        val customer = Customer()
-        BeanUtils.copyProperties(form, customer)
+        val customer: Customer = modelMapper.map(form, Customer::class.java)
         customerService.create(customer, userDetails.user)
         return "redirect:/customers"
     }
@@ -42,7 +43,7 @@ class CustomerController(@Autowired val customerService: CustomerService) {
     @GetMapping(path = ["edit"], params = ["form"])
     fun editForm(@RequestParam id: Int, form: CustomerForm): String {
         val customer = customerService.findOne(id)
-        BeanUtils.copyProperties(customer, form)
+        modelMapper.map(customer, form)
         return "customers/edit"
     }
 
@@ -52,8 +53,7 @@ class CustomerController(@Autowired val customerService: CustomerService) {
         if (result.hasErrors()) {
             return editForm(id, form)
         }
-        val customer = Customer()
-        BeanUtils.copyProperties(form, customer)
+        val customer: Customer = modelMapper.map(form, Customer::class.java)
         customer.id = id
         customerService.update(customer, userDetails.user)
         return "redirect:/customers"
