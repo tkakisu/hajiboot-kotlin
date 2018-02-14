@@ -11,13 +11,9 @@ import javax.transaction.Transactional
 @Transactional
 class CustomerService(@Autowired val customerRepository: CustomerRepository) {
 
-    fun findAll(): List<Customer> {
-        return customerRepository.findAllOrderByName()
-    }
+    fun findAll() = customerRepository.findAllOrderByName()
 
-    fun findOne(id: Int): Customer {
-        return customerRepository.findOne(id)
-    }
+    fun findOne(id: Int): Customer? = customerRepository.findOne(id)
 
     fun create(customer: Customer, user: User): Customer {
         customer.user = user

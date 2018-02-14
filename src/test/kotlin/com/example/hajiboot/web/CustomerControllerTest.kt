@@ -3,8 +3,7 @@ package com.example.hajiboot.web
 import com.example.hajiboot.service.CustomerService
 import org.hamcrest.Matchers.containsString
 import org.hamcrest.Matchers.equalTo
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertThat
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -58,6 +57,9 @@ class CustomerControllerTest {
                 .param("firstName", "Hidetoshi")
                 .param("lastName", "Dekisugi"))
                 .andExpect(status().isForbidden)
+
+        val customer = customerService.findOne(4)
+        assertNull(customer)
     }
 
     @Test
@@ -72,7 +74,7 @@ class CustomerControllerTest {
                 .andExpect(redirectedUrl("/customers"))
                 .andExpect(authenticated().withUsername("user2"))
 
-        val customer = customerService.findOne(4)
+        val customer = customerService.findOne(4)!!
         assertNotNull(customer)
         assertThat(customer.firstName, equalTo("Hidetoshi"))
         assertThat(customer.lastName, equalTo("Dekisugi"))

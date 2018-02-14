@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.*
 class CustomerController(@Autowired val customerService: CustomerService,
                              @Autowired val modelMapper: ModelMapper) {
     @ModelAttribute
-    fun setUpForm(): CustomerForm {
-        return CustomerForm()
-    }
+    fun setUpForm() = CustomerForm()
 
     @GetMapping
     fun list(model: Model): String {

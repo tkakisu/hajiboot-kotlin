@@ -32,7 +32,5 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return Pbkdf2PasswordEncoder()
-    }
+    fun passwordEncoder() = Pbkdf2PasswordEncoder()
 }
